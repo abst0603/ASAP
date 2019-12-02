@@ -1,5 +1,5 @@
-function samples1 = epsilon_dense_2(samples_output3_3,samples1,ep)
-samples = samples_output3_3;
+function samples1 = epsilon_dense_2(data,samples1,ep)
+samples = data;
 
 %% in this parts points repel each other so they will fill the whole space 
 % and more space will be provided so we can sample again in this space. The
@@ -10,7 +10,7 @@ tau = 3.5;
 while(lr > 0.1*ep^3)
     lr = ((ep)^3)*exp(-counter1/tau);
     counter1 = counter1 + 1;
-    samples = samples_output3_3;
+    samples = data;
     setloop = randperm(size(samples1,1));
     idx = rangesearch(samples1,samples1,2*ep);
     for i = setloop
@@ -23,7 +23,7 @@ while(lr > 0.1*ep^3)
         revdist = lr./dist;
         nn = sum(((samples1(i,:) - samples1(idx{i},:))./vecnorm((samples1(i,:) - samples1(idx{i},:)),2,2)).*revdist);
         bb = samples1(i,:) + nn;
-        cc = samples_output3_3(knnsearch(samples_output3_3,bb,'k',1),:);
+        cc = data(knnsearch(data,bb,'k',1),:);
         if((nnz(ismember(samples1,cc,'row'))==0) && nnz(pdist2(samples1(idx{i},:),cc)<=ep)==0)% (idx{i},:)
             samples1(i,:) = cc;
         end
