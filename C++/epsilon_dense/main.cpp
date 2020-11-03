@@ -1,15 +1,13 @@
 #include <iostream>
 #include <array>
 #include <vector>
-#include <readdata.h>
 #include <rangesearch.h>
 #include <cmath>
 #include <random>
 #include <algorithm>
 #include <ctime>
-
 using namespace std;
-
+//void RangeSearch(std::vector<std::vector<unsigned int>> &indices, std::vector<std::array<float,3>> &data, float radius);
 int main()
 {
 
@@ -26,7 +24,7 @@ int main()
     std::cin>>radius;
     float radius2 = std::pow(radius,2);
     std::array<float,3> point;
-    std::vector<std::vector<int>> idx;
+    std::vector<std::vector<unsigned int>> idx;
     int i = 0;
     while(data.size()>0){
         point = data[rand()%data.size()];
@@ -59,7 +57,7 @@ int main()
         std::random_shuffle ( samples.begin(), samples.end() );
 
         counter ++;
-        rangesearchfastV(samples, idx, 2*radius);
+        RangeSearch(idx, samples, 2*radius);
         for (unsigned int i=0; i<samples.size(); i++){
             if(idx[i].size() == 0)
                 continue;
