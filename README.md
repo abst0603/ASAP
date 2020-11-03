@@ -10,6 +10,9 @@ ep: the radius for subsampling
 
 samples: the output matrix which contains the samples
 
+##C++
+To build the run file please download the nanoflann library. It's a header-only library, therefore you don't need to install it, however, you should add the address of "utils.h" and "nanoflann.hpp" to your search address. This code can only process 3D data points, and it is not implemented for a higher dimension yet.
+
 ## Citation
 @inproceedings{Taghribi2020,
 title = {ASAP - A Sub-sampling Approach for Preserving Topological Structures},
