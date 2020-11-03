@@ -5,7 +5,6 @@
 #include <iostream>
 #include <string>
 #include <iostream>
-//#include <fstream>
 #include <readdata.h>
 #ifndef PREPROCESS_H
 #define PREPROCESS_H
