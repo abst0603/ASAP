@@ -9,9 +9,9 @@
 
 #ifndef RANGESEARCH_H
 #define RANGESEARCH_H
-void RangeSearch(std::vector<std::vector<unsigned int>> &indices, std::vector<std::array<float,3>> &data, float radius);
-void pdist2(std::vector<std::array<float,3>> &data, std::array<float,3> &point, std::vector<float> &distmat);
-std::vector<std::array<float,3> > readdata(std::string name_of_file);
-void writeCSV2d(std::string name_of_file,std::vector<std::array<float,3>> vec);
+void RangeSearch(std::vector<std::vector<unsigned int>> &indices, std::vector<std::vector<float>> &data, float radius);
+void pdist2(std::vector<std::vector<float>> &data, std::vector<float> &point, std::vector<float> &distmat);
+void readdata(const int dim, std::vector<std::vector<float> >  &data, std::string name_of_file);
+void writeCSV2d(std::string name_of_file,std::vector<std::vector<float>> vec);
 
 #endif
