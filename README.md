@@ -11,7 +11,7 @@ ep: the radius for subsampling
 samples: the output matrix which contains the samples
 
 ## C++
-To build the run file please download the nanoflann library. It's a header-only library, therefore you don't need to install it, however, you should add the address of "utils.h" and "nanoflann.hpp" to your search address. This code can only process 3D data points, and it is not implemented for a higher dimension yet.
+To build the run-file please download the [nanoflann](https://github.com/jlblancoc/nanoflann) library. It's a header-only library, therefore you don't need to install it, however, you should add the address of "utils.h", "KDTreeVectorOfVectorsAdaptor.h", and "nanoflann.hpp" to the search address. Also please compile the code with **C++14** standard. The C++ code is faster than Matlab implementation, and it requires the data in a form of a CSV file with each sample as a row of the file. You should specify the *dimension* of the data in the code before compilation(in **dim** variable). 
 
 ## Citation
 @inproceedings{Taghribi2020,
