@@ -6,7 +6,7 @@ cnt = 0;
 %check the packing condition
 while (cnt<size(samples,1))
     cnt = cnt + 1;
-    idx = rangesearch(samples,samples(cnt,:),ep);
+    idx = rangesearch(samples,samples(cnt,:),ep,'SortIndices',false);
     samples = setdiff(samples,samples(idx{1}(2:end),:),'rows','stable');
 end
 
