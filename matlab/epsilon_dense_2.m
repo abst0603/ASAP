@@ -31,7 +31,7 @@ while(lr > 0.1*ep^3)
     %% Check to see if some empty space is added or not with respect to previous
     % step
 %% version 2(faster)
-    idx = rangesearch(samples,samples1,ep,'SortIndices',false);
+    idx = rangesearch(samples,samples1,ep);
     innd = unique(horzcat(idx{:}));
     samples(innd,:) = [];
     samples2 = samples;
@@ -41,7 +41,7 @@ while(lr > 0.1*ep^3)
     cnt = 0;
     while (cnt<size(samples2,1))
         cnt = cnt + 1;
-        idx = rangesearch(samples2,samples2(cnt,:),ep,'SortIndices',false);
+        idx = rangesearch(samples2,samples2(cnt,:),ep);
         samples2 = setdiff(samples2,samples2(idx{1}(2:end),:),'rows','stable');
     end
     samples1 = [samples1;samples2];
@@ -50,7 +50,7 @@ end
 cnt = 0;
 while (cnt<size(samples1,1))
     cnt = cnt + 1;
-    idx = rangesearch(samples1,samples1(cnt,:),ep,'SortIndices',false);
+    idx = rangesearch(samples1,samples1(cnt,:),ep);
     samples1 = setdiff(samples1,samples1(idx{1}(2:end),:),'rows','stable');
 end
 end
