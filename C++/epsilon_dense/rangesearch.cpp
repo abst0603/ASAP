@@ -16,12 +16,9 @@ void pdist2(std::vector<std::vector<float>> &data, std::vector<float> &point, st
 void RangeSearch(std::vector<std::vector<unsigned int>> &indices, std::vector<std::vector<float>> &data, float radius)
 {
     indices.resize(data.size());
-    PointCloud<float> cloud;
     // Nanoflann library gets r^2 as the radius
     radius = std::pow(radius,2);
-
     typedef KDTreeVectorOfVectorsAdaptor< std::vector<std::vector<float> >, float >  my_kd_tree_t;
-
 	my_kd_tree_t   mat_index(data[0].size()  /*dim*/, data, 10 /* max leaf */ );
 	mat_index.index->buildIndex();
 
@@ -35,9 +32,9 @@ void RangeSearch(std::vector<std::vector<unsigned int>> &indices, std::vector<st
     for (unsigned int idx = 0; idx<data.size(); idx++)
     {
         nMatches = mat_index.index->radiusSearch(&data[idx][0], radius, ret_matches, params);
-        indices[idx].resize(nMatches);
+        indices[idx].resize(nMatches-1);
         for (int j = 1; j < nMatches; j++)// I remove the first idx since it is the index of the selected point itself
-            indices[idx][j] = ret_matches[j].first;
+            indices[idx][j-1] = ret_matches[j].first;
 
     }
 }
