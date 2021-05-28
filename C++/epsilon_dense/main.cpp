@@ -27,7 +27,7 @@ void sample_by_covering_condition(std::vector<std::vector<float>> &data,std::vec
     data.shrink_to_fit();
 }
 
-//void first_sample_by_covering_condition(my_kd_tree_t &mat_index, std::vector<std::vector<float>> &data,std::vector<std::vector<float>> &samples, float radius2, int dim){
+//void sample_by_covering_condition(std::vector<std::vector<float>> &data,std::vector<std::vector<float>> &samples, float radius2, int dim){
 //    if(data.size()!=0){ //the size of data might become zero in the loop so we should handle it safely
 //    std::vector<unsigned int> indices;
 //    std::vector<unsigned int> all_indices;
@@ -36,10 +36,10 @@ void sample_by_covering_condition(std::vector<std::vector<float>> &data,std::vec
 //    for(int i = 0;i<data.size();i++)
 //        all_indices[i] = i;
 //
-////    typedef KDTreeVectorOfVectorsAdaptor< std::vector<std::vector<float> >, float >  my_kd_tree_t;
-////
-////	my_kd_tree_t   mat_index(dim  /*dim*/, data, 10 /* max leaf */ );
-////	mat_index.index->buildIndex();
+//    typedef KDTreeVectorOfVectorsAdaptor< std::vector<std::vector<float> >, float >  my_kd_tree_t;
+//
+//	my_kd_tree_t   mat_index(dim  /*dim*/, data, 10 /* max leaf */ );
+//	mat_index.index->buildIndex();
 //	std::vector<std::pair<unsigned long int,float> >   ret_matches;
 //    nanoflann::SearchParams params;
 //    params.sorted = false;
@@ -117,6 +117,7 @@ void check_covering_condition(my_kd_tree_t &mat_index, std::vector<std::vector<f
 
 void coulomb_law_movements(my_kd_tree_t &mat_index, std::vector<std::vector<float>> &data,std::vector<std::vector<float>> &samples, float radius, int dim, float lr){
     std::vector<std::vector<unsigned int>> idx;
+    std::vector<std::vector<float>> dist;
     std::vector<std::vector<float>> nsamples(dim);
     std::vector<float> distmat;
     std::vector<float> sumtmp(dim,0);
@@ -124,14 +125,15 @@ void coulomb_law_movements(my_kd_tree_t &mat_index, std::vector<std::vector<floa
     int tmpidx = 0;
     bool flag = false;
     float radius2 = std::pow(radius,2);
-    RangeSearch(idx, samples, 2*radius);
+    RangeSearch(idx, dist, samples, 2*radius);
     for (unsigned int i=0; i<samples.size(); i++){
         if(idx[i].size() == 0)
             continue;
         nsamples.resize(idx[i].size(),sumtmp);
         for(unsigned int j = 0; j<idx[i].size();j++)
             nsamples[j] = samples[idx[i][j]];
-        pdist2(nsamples, samples[i], distmat);
+        // Distance between neighboring samples
+        distmat = dist[i];
         // Compute the displacement
         for(unsigned int j = 0; j<idx[i].size();j++)
             for(unsigned int cnt = 0; cnt<dim;cnt++)

@@ -3,19 +3,10 @@
 #include "KDTreeVectorOfVectorsAdaptor.h"
 using namespace nanoflann;
 
-void pdist2(std::vector<std::vector<float>> &data, std::vector<float> &point, std::vector<float> &distmat){
-    // instead of computing sqrt() of distance, compute the 2nd power of radius once and compare it again and again which is faster
-    distmat.resize(data.size());
-    for (unsigned int i=0;i<data.size();i++){
-        distmat[i] = 0;
-        for(unsigned int j=0;j<data[0].size();j++)
-            distmat[i] += std::pow(data[i][j]-point[j],2);
-    }
-}
-
-void RangeSearch(std::vector<std::vector<unsigned int>> &indices, std::vector<std::vector<float>> &data, float radius)
+void RangeSearch(std::vector<std::vector<unsigned int>> &indices, std::vector<std::vector<float>> &dist, std::vector<std::vector<float>> &data, float radius)
 {
     indices.resize(data.size());
+    dist.resize(data.size());
     // Nanoflann library gets r^2 as the radius
     radius = std::pow(radius,2);
     typedef KDTreeVectorOfVectorsAdaptor< std::vector<std::vector<float> >, float >  my_kd_tree_t;
@@ -33,9 +24,11 @@ void RangeSearch(std::vector<std::vector<unsigned int>> &indices, std::vector<st
     {
         nMatches = mat_index.index->radiusSearch(&data[idx][0], radius, ret_matches, params);
         indices[idx].resize(nMatches-1);
+        dist[idx].resize(nMatches-1);
         for (int j = 1; j < nMatches; j++)// I remove the first idx since it is the index of the selected point itself
-            indices[idx][j-1] = ret_matches[j].first;
-
+            {indices[idx][j-1] = ret_matches[j].first;
+            dist[idx][j-1] = ret_matches[j].second;
+            }
     }
 }
 
