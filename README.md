@@ -13,6 +13,12 @@ samples: the output matrix which contains the samples
 ## C++
 To build the run-file please download the [nanoflann](https://github.com/jlblancoc/nanoflann) library. It's a header-only library, therefore you don't need to install it, however, you should add the address of "utils.h", "KDTreeVectorOfVectorsAdaptor.h", and "nanoflann.hpp" to the search address. Also please compile the code with **C++14** standard. The C++ code is faster than Matlab implementation, and it requires the data in a form of a CSV file with each sample as a row of the file. You should specify the *dimension* of the data in the code before compilation(in **dim** variable). 
 
+## Python
+The subsampling based on ASAP, finding the border of topological features using [Dionysus](https://www.mrzv.org/software/dionysus2/) toolbox and voting procedure are all now available in Python. I'm still working on this part, but soon I will make a general example to show all parts of the experiment in one example in Python. ASAP subsampling code in C++ was bind in Python with [pybind11](https://pybind11.readthedocs.io/en/stable/basics.html). Note that you should insert the dimension of data in advance in C++ code before compiling. You can compile the code for now using the following code.
+```
+c++ -O2 -Wall -shared -std=c++14 -I~/nanoflann/include -I~/nanoflann/examples -fPIC $(python3 -m pybind11 --includes) asap.cpp -o asap$(python3-config --extension-suffix)
+```
+
 ## Citation
 @inproceedings{Taghribi2020,
 title = {ASAP - A Sub-sampling Approach for Preserving Topological Structures},
