@@ -15,9 +15,12 @@ for i in range(100):
 
 # Extract cycles in every sampling iteration
 extracted_cycles = extract_cycles(samples, 3, 0.02)
+# extracted_cycles is the list of all found cycles with dimension "dim" and minimum persistence of "min_persistence" is "number_of_iteration" samples
 
 # Apply voting procedure and discover all candidates for superbubbles
 candidates_list = voting(extracted_cycles,0.5,0.3)# radius is chosen twice the radius of sampling
+# candidates_list is the list that contains all cycles in "extracted_cycles" together with their voting value for every points on the border of cycles.
+# Note that all iteration of a single cycle in different sampling iterations are represented only with one object now.
 
 # plot and color the bigger hole with red
 thirdq =np.quantile(candidates_list[0].votes,0.3)
