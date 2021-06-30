@@ -11,12 +11,18 @@ namespace py = pybind11;
 #include <random>
 #include <algorithm>
 #include <ctime>
+#include <chrono>
+#include <sys/time.h>
 #include <KDTreeVectorOfVectorsAdaptor.h>
 using namespace std;
 typedef KDTreeVectorOfVectorsAdaptor< std::vector<std::vector<double> >, double >  my_kd_tree_t;
 const int dim = DIMENSION; //You should set the value before compiling since nanoflann use this value for unrolling the loops.
 
 using namespace nanoflann;
+using std::chrono::duration_cast;
+using std::chrono::milliseconds;
+using std::chrono::system_clock;
+
 
 void RangeSearch(std::vector<std::vector<unsigned int>> &indices, std::vector<std::vector<double>> &dist, std::vector<std::vector<double>> &data, double radius)
 {
@@ -47,6 +53,7 @@ void RangeSearch(std::vector<std::vector<unsigned int>> &indices, std::vector<st
 
 // On small scale datasets(a few ten thousands), the following version is faster than the next implementation, but on bigger one it may be different
 void sample_by_covering_condition(std::vector<std::vector<double>> &data,std::vector<std::vector<double>> &samples, double radius2, int dim){
+    srand (duration_cast<milliseconds>(system_clock::now().time_since_epoch()).count()); // The code is really fast for small dataset, thus srand should be changed by millisecond
     std::vector<double> point(dim);
     while(data.size()>0){
         point = data[rand()%data.size()];

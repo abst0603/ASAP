@@ -21,8 +21,8 @@ class candidate:
 def voting(lol_cycles,threshold,radius):
     ############################
     # lol_cycles : list of list of cycles
-    # threshold : if the distance between the center of two cycles is smaller than this number, we assume them as one cycle
-    # keep a track of which cycles have been already observed in voting procedure
+    # threshold : if the distance between the center of two cycles is smaller than "threshold", we assume them as one cycle
+    # radius : The radius of neighborhood for counting points as votes
     seen_cycles = []
     for i in range(len(lol_cycles)):
         n = len(lol_cycles[i])

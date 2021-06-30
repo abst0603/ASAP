@@ -35,13 +35,13 @@ def sort_cycles(cycle_list):
         sorted_list.append(cycle_list[sortedarg[-1-i]]) #decending order
     return sorted_list
 
-# filtration with Dionysus is super slow. Always use Gudhi
-def extract_cycles(matfile, dim, min_persistence):
-    mat = scipy.io.loadmat(matfile)
+# dim : represent the dimension of cycles we want to recover
+# min_persistence : minimum persistency of the cycles to recover
+def extract_cycles(samples, dim, min_persistence):
     sc_list = []
-    for cnt in range(len(mat["samples"])):
-        data = mat["samples"][cnt,0]
-        alpha_complex = gd.AlphaComplex(points=data)#, [0.5, -0.5], [0.5, 1.5], [-0.5, 0.5]
+    for cnt in range(len(samples)):
+        data = samples[cnt]
+        alpha_complex = gd.AlphaComplex(points=data)
         simplex_tree = alpha_complex.create_simplex_tree()
         # Note that Gudhi changes the order of the points, thus we should extract new order based on verticies in alpha complex
         v2d = vertex2data(alpha_complex, data.shape)
