@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import axes3d, Axes3D
 
 # Read the data
-data = np.genfromtxt('../dataset/synjelly_gudhi.csv', delimiter=',')
+data = np.genfromtxt('../dataset/syntheticJellyfish/synjelly_gudhi.csv', delimiter=',')
 # iterate subsampling 100 times
 number_of_iteration = 100
 samples = [0]*number_of_iteration
