@@ -11,11 +11,12 @@ ep: the radius for subsampling
 samples: the output matrix which contains the samples
 
 ## install
-1- In this project we also use two other packages, namely "Nanoflann" and "pybind11". As a result to build the project completely you sould clone the ripository with the external submodules using following code:
+1- In this project we also use two other packages, namely "Nanoflann" and "pybind11". As a result, to build the project completely you should clone the repository with the external submodules using the following code:
 ```shell
 git clone --recurse-submodules https://github.com/abst0603/ASAP.git
 ```
 2- Run `pip install -r requirements.txt` or `pip3 install -r requirements.txt`
+
 3- Build the project using CMake:
 ```shell
 mkdir build
@@ -30,13 +31,14 @@ cd build
 cmake .. -DPYTHON_INCLUDE_DIR=$(python -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())")  -DPYTHON_LIBRARY=$(python -c "import distutils.sysconfig as sysconfig; print(sysconfig.get_config_var('LIBDIR'))")
 make
 ```
-Check the link bellow for more information about this problem:
+Check the link below for more information about this problem:
 [cmake is not able to find python libraries](https://stackoverflow.com/questions/24174394/cmake-is-not-able-to-find-python-libraries)
-4- When this is done, you should see a shared library is build in python folder. You can insert this library to subsample the data as follows:
+
+4- When this is done, you should see a shared library is built in the python folder. You can insert this library to subsample the data as follows:
 ```python
 import asap
 ```
-5- There is a full example in python folder on how to apply ASAP subsampling, then extracting cycles in every iteration of subsamples, and finally, apply voting procedure as described in our paper.
+5- There is a full example in python folder on how to apply ASAP subsampling, then extracting cycles in every iteration of subsamples, and finally, apply the voting procedure as described in our paper.
 
 
 ## Citation
