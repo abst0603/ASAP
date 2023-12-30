@@ -1,2 +1,2 @@
 - unfiltered: contains the location and other information for particles inside each snapshot
-- filtered: contains the location and other information for particles inside each snapshot if their density is higher than 6e-6
+- filtered: contains the location and other information for particles inside each snapshot if their density is higher than 10<sup>-3</sup> atom/cm<sup>3</sup>(6e-6)
