@@ -1,10 +1,10 @@
 import os
 
 import matplotlib.pyplot as plt
-from multiprocessing import Pool
 import numpy as np
 from extract_cycles import extract_cycles
 from mpl_toolkits.mplot3d import axes3d, Axes3D
+from multiprocessing import Pool
 
 import asap
 from Voting import voting
@@ -15,8 +15,8 @@ def multi_run_wrapper(args):
 
 if __name__=="__main__":
     # Read the data
-    # data = np.genfromtxt('../dataset/syntheticJellyfish/synjelly_gudhi.csv', delimiter=',')
-    data = np.genfromtxt('/home/abst/Desktop/project/Topology/Tracking_Supernovae/firsttry/code_rewrite/ASAP/datasets/syntheticJellyfish/synjelly_gudhi.csv', delimiter=',')
+    data = np.genfromtxt('../dataset/syntheticJellyfish/synjelly_gudhi.csv', delimiter=',')
+    
     # iterate subsampling 100 times
     number_of_iteration = 100
     samples = [0]*number_of_iteration
@@ -35,8 +35,8 @@ if __name__=="__main__":
     # Note that all iteration of a single cycle in different sampling iterations are represented only with one object.
 
     # plot and color the bigger hole with red
-    thirdq = np.quantile(candidates_list[0].votes,0.3)
-    points = candidates_list[0].points[candidates_list[0].votes>thirdq,:]
+    thirdq = np.quantile(candidates_list[0].votes, 0.3)
+    points = candidates_list[0].points[candidates_list[0].votes>thirdq, :]
     fig = plt.figure()
     ax = fig.add_subplot(projection='3d')
     ax.scatter(points[:, 0], points[:, 1], points[:, 2], marker='o', color='r')
