@@ -70,8 +70,10 @@ abstract = {Topological data analysis tools enjoy increasing popularity in a wid
 ```
 
 
-## Manuscript
-https://www.esann.org/sites/default/files/proceedings/2020/ES2020-147.pdf
+## Manuscripts
+[ASAP - A Sub-sampling Approach for Preserving Topological Structures Modeled with Geodesic Topographic Mapping](https://www.sciencedirect.com/science/article/pii/S0925231221011139)
+
+[ASAP - A Sub-sampling Approach for Preserving Topological Structures](https://www.esann.org/sites/default/files/proceedings/2020/ES2020-147.pdf)
 
 ## Contact
 If you have a question you can directly raise an issue in the repository. Otherwise, feel free to send me an email (abolfazl.taghribi@gmail.com)
